@@ -25,6 +25,14 @@ class CountryListViewController: UIViewController {
         }
     }
     
+    var favoriteCountries = [Country]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
     private let dbHelper = CoreDBHelper.getInstance()
     
     // MARK: - Lifecycle
@@ -42,8 +50,8 @@ class CountryListViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        // TODO: make the changes when user goes back to the list
-        
+        self.setFavoriteCountries() // Sets the favorite countries if there is any change
+        showAllCountries() // When user goes back to main list, it shows All Countries
     }
 
     // MARK: - Helpers
@@ -54,6 +62,7 @@ class CountryListViewController: UIViewController {
     }
     
     private func fetchAllCountries() {
+        // Fetch all countries from API
         CountryViewModel.shared.fetchAllCountries { countryList, error in
             guard let countryList = countryList, error == nil else {
                 print(#function, "Error while fetching all countries: \(error!.localizedDescription)")
@@ -61,36 +70,73 @@ class CountryListViewController: UIViewController {
             }
             
             self.allCountries = countryList
+            
+            // Set favorites from CoreData
+            self.setFavoriteCountries()
         }
     }
     
+    private func isFavorite(country: Country) -> Bool {
+        
+        if dbHelper.searchFavorite(countryName: country.name) != nil {
+            var favoriteCountry = country
+            favoriteCountry.isFavorite = true
+            favoriteCountries.append(favoriteCountry)
+            return true
+        }
+        return false
+    }
+    
+    private func setFavoriteCountries() {
+        
+        favoriteCountries = [Country]()
+        
+        for i in 0 ..< self.allCountries.count {
+            self.allCountries[i].isFavorite = isFavorite(country: self.allCountries[i])
+        }
+    }
+    
+    private func deleteFavorite(countryName: String) {
+        dbHelper.deleteFavorite(countryName: countryName)
+        setFavoriteCountries()
+    }
+    
+    private func isViewInFavoriteState() -> Bool {
+        return self.title == NavigationTitle.FAVORITES
+    }
+    
+    private func getCurrentCountry(row: Int) -> Country {
+        if isViewInFavoriteState() {
+            return favoriteCountries[row]
+        }
+        return allCountries[row]
+    }
     
     // MARK: - Selectors
     
     @objc private func showFavorites() {
         
         // load favorites
+        self.title = NavigationTitle.FAVORITES
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: ButtonTitle.SHOW_ALL, style: .plain, target: self, action: #selector(showAllCountries))
         
         tableView.reloadData()
-        
-        self.title = "Favorite Countries"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Show All", style: .plain, target: self, action: #selector(showAllCountries))
 
     }
     
     @objc private func showAllCountries() {
         
         // load all countries
+        self.title = NavigationTitle.ALL_COUNTRIES
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: ButtonTitle.SHOW_FAVORITE, style: .plain, target: self, action: #selector(showFavorites))
         
         tableView.reloadData()
-        
-        self.title = "All Countries"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Show Favorites", style: .plain, target: self, action: #selector(showFavorites))
 
     }
 
 }
 
+// MARK: - UITableView Delegate and Datasource functions
 extension CountryListViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -98,16 +144,31 @@ extension CountryListViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return allCountries.count
+        if isViewInFavoriteState() {
+            return favoriteCountries.count
+        }
+        else {
+            return allCountries.count
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath)
         
-        let country = allCountries[indexPath.row]
+        let country = getCurrentCountry(row: indexPath.row)
         
         cell.textLabel?.text = country.name
         cell.detailTextLabel?.text = "\(country.population)"
+        
+        if country.isFavorite {
+            cell.textLabel?.backgroundColor = .systemYellow
+            cell.detailTextLabel?.backgroundColor = .systemYellow
+        }
+        else {
+            cell.textLabel?.backgroundColor = .clear
+            cell.detailTextLabel?.backgroundColor = .clear
+        }
         
         return cell
     }
@@ -115,10 +176,29 @@ extension CountryListViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
+        let country = getCurrentCountry(row: indexPath.row)
+        
         if let detailsVC = self.storyboard?.instantiateViewController(withIdentifier: "CountryDetailsViewController") as? CountryDetailsViewController {
-            detailsVC.country = allCountries[indexPath.row]
+            detailsVC.country = country
             self.navigationController?.pushViewController(detailsVC, animated: true)
         }
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        let country = getCurrentCountry(row: indexPath.row)
+        
+        var countrySize = allCountries.count
+        if isViewInFavoriteState() {
+            countrySize = favoriteCountries.count
+        }
+        
+        if country.isFavorite {
+            if (editingStyle == UITableViewCell.EditingStyle.delete && indexPath.row < countrySize) {
+                self.deleteFavorite(countryName: country.name)
+            }
+        }
+        
     }
     
 }

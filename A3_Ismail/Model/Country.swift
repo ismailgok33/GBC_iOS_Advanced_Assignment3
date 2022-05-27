@@ -14,6 +14,7 @@ struct Country: Decodable {
     let countryCode: String
     let latlng: [Double]
     let area: Double
+    var isFavorite = false
     
     enum CodingKeys: String, CodingKey {
         case name

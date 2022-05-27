@@ -133,6 +133,7 @@
                                     <constraint firstAttribute="width" constant="150" id="3K9-CR-e3f"/>
                                     <constraint firstAttribute="height" constant="50" id="mKy-Vt-g5t"/>
                                 </constraints>
+                                <color key="tintColor" red="0.59999999999999998" green="0.85098039219999999" blue="0.54901960780000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Add Favorite"/>
                                 <connections>

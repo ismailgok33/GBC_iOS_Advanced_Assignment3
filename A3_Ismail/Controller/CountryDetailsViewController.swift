@@ -24,6 +24,7 @@ class CountryDetailsViewController: UIViewController {
 
     var country: Country?
     private let geocoder = CLGeocoder()
+    private let dbHelper = CoreDBHelper.getInstance()
     
     // MARK: - Lifecycle
     
@@ -56,7 +57,9 @@ class CountryDetailsViewController: UIViewController {
         
         showCapitalOnMap(latlng: country?.latlng ?? [Double](), countryName: countryName, capital: capital, area: area)
         
-        // TODO: set Favorite Button title according to its favorite state
+        if self.country?.isFavorite == true {
+            disableFavoriteButton()
+        }
         
     }
     
@@ -77,14 +80,60 @@ class CountryDetailsViewController: UIViewController {
             mapMarker.title = "The capital of \(countryName) is \(capital)"
             self.mapView.addAnnotation(mapMarker)
         }
-        
-        
     }
+    
+    private func setFavoriteButtonStyle(title: String, color: UIColor) {
+        self.favoriteButton.setTitle(title, for: .normal)
+        self.favoriteButton.tintColor = color
+    }
+    
+    private func disableFavoriteButton() {
+        setFavoriteButtonStyle(title: ButtonTitle.DISABLED_BUTTON_TEXT, color: .disabledButtonColor)
+        self.favoriteButton.isEnabled = false
+    }
+    
+//    private func toggleFavoriteButtonStyle() {
+//        if self.favoriteButton.titleLabel?.text == ButtonTitle.ADD_BUTTON_TEXT {
+//            setFavoriteButtonStyle(title: ButtonTitle.DISABLED_BUTTON_TEXT, color: .disabledButtonColor)
+//        }
+//        else if self.favoriteButton.titleLabel?.text == ButtonTitle.DISABLED_BUTTON_TEXT {
+//            setFavoriteButtonStyle(title: ButtonTitle.ADD_BUTTON_TEXT, color: .addButtonColor)
+//        }
+//    }
+    
+//    private func fetchCountryStatus() {
+//
+//        // TODO: Check if the current country is in the favoriteCountries array
+//        if let countryName = self.countryName.text {
+//            let favoriteCountry = dbHelper.searchFavorite(countryName: countryName)
+//        }
+//
+//    }
     
     // MARK: - Actions
     
     @IBAction func favoriteButtonTapped(_ sender: UIButton) {
         print(#function, "DEBUG: favorite button is tapped..")
+        
+        if country?.isFavorite == false {
+            if let countryName = self.countryName.text {
+                dbHelper.insertFavorite(countryName: countryName)
+                disableFavoriteButton()
+            }
+            
+        }
+        
+//        if let countryName = self.countryName.text {
+//            if dbHelper.searchFavorite(countryName: countryName) == nil {
+//                dbHelper.insertFavorite(countryName: countryName)
+//
+//                if sender.titleLabel?.text == ButtonTitle.ADD_BUTTON_TEXT {
+//                    disableFavoriteButton()
+//                }
+//            }
+//        }
+        
+        
     }
     
     // MARK: - Selectors

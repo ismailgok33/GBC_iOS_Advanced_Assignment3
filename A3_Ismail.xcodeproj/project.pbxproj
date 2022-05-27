@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		ECBC0FAC284128DA005C9895 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECBC0FAB284128DA005C9895 /* Extensions.swift */; };
 		ECC049C728405A3A0017333D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC049C628405A3A0017333D /* AppDelegate.swift */; };
 		ECC049C928405A3A0017333D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC049C828405A3A0017333D /* SceneDelegate.swift */; };
 		ECC049CB28405A3A0017333D /* CountryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC049CA28405A3A0017333D /* CountryListViewController.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		ECBC0FAB284128DA005C9895 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		ECC049C328405A3A0017333D /* A3_Ismail.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = A3_Ismail.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECC049C628405A3A0017333D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ECC049C828405A3A0017333D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				ECC049EB284064680017333D /* Constants.swift */,
+				ECBC0FAB284128DA005C9895 /* Extensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -209,6 +212,7 @@
 				ECC049D128405A3A0017333D /* A3_Ismail.xcdatamodeld in Sources */,
 				ECC049E228405D3F0017333D /* CoreDBHelper.swift in Sources */,
 				ECC049CB28405A3A0017333D /* CountryListViewController.swift in Sources */,
+				ECBC0FAC284128DA005C9895 /* Extensions.swift in Sources */,
 				ECC049C728405A3A0017333D /* AppDelegate.swift in Sources */,
 				ECC049E428405ECB0017333D /* CountryDetailsViewController.swift in Sources */,
 				ECC049C928405A3A0017333D /* SceneDelegate.swift in Sources */,
