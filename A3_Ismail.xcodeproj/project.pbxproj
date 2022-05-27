@@ -9,23 +9,33 @@
 /* Begin PBXBuildFile section */
 		ECC049C728405A3A0017333D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC049C628405A3A0017333D /* AppDelegate.swift */; };
 		ECC049C928405A3A0017333D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC049C828405A3A0017333D /* SceneDelegate.swift */; };
-		ECC049CB28405A3A0017333D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC049CA28405A3A0017333D /* ViewController.swift */; };
+		ECC049CB28405A3A0017333D /* CountryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC049CA28405A3A0017333D /* CountryListViewController.swift */; };
 		ECC049CE28405A3A0017333D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECC049CC28405A3A0017333D /* Main.storyboard */; };
 		ECC049D128405A3A0017333D /* A3_Ismail.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = ECC049CF28405A3A0017333D /* A3_Ismail.xcdatamodeld */; };
 		ECC049D328405A3C0017333D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ECC049D228405A3C0017333D /* Assets.xcassets */; };
 		ECC049D628405A3C0017333D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECC049D428405A3C0017333D /* LaunchScreen.storyboard */; };
+		ECC049E228405D3F0017333D /* CoreDBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC049E128405D3F0017333D /* CoreDBHelper.swift */; };
+		ECC049E428405ECB0017333D /* CountryDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC049E328405ECB0017333D /* CountryDetailsViewController.swift */; };
+		ECC049E628405FF20017333D /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC049E528405FF20017333D /* Country.swift */; };
+		ECC049E9284063880017333D /* CountryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC049E8284063880017333D /* CountryViewModel.swift */; };
+		ECC049EC284064680017333D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC049EB284064680017333D /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		ECC049C328405A3A0017333D /* A3_Ismail.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = A3_Ismail.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECC049C628405A3A0017333D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ECC049C828405A3A0017333D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		ECC049CA28405A3A0017333D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		ECC049CA28405A3A0017333D /* CountryListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryListViewController.swift; sourceTree = "<group>"; };
 		ECC049CD28405A3A0017333D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		ECC049D028405A3A0017333D /* A3_Ismail.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = A3_Ismail.xcdatamodel; sourceTree = "<group>"; };
 		ECC049D228405A3C0017333D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ECC049D528405A3C0017333D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ECC049D728405A3C0017333D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ECC049E128405D3F0017333D /* CoreDBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDBHelper.swift; sourceTree = "<group>"; };
+		ECC049E328405ECB0017333D /* CountryDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryDetailsViewController.swift; sourceTree = "<group>"; };
+		ECC049E528405FF20017333D /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
+		ECC049E8284063880017333D /* CountryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryViewModel.swift; sourceTree = "<group>"; };
+		ECC049EB284064680017333D /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,16 +68,69 @@
 		ECC049C528405A3A0017333D /* A3_Ismail */ = {
 			isa = PBXGroup;
 			children = (
+				ECC049E7284063530017333D /* ViewModel */,
+				ECC049E028405D2F0017333D /* DB */,
+				ECC049DD28405ABD0017333D /* Model */,
+				ECC049DE28405AC40017333D /* Controller */,
+				ECC049DF28405ACA0017333D /* View */,
+				ECC049EA2840645C0017333D /* Utils */,
 				ECC049C628405A3A0017333D /* AppDelegate.swift */,
 				ECC049C828405A3A0017333D /* SceneDelegate.swift */,
-				ECC049CA28405A3A0017333D /* ViewController.swift */,
 				ECC049CC28405A3A0017333D /* Main.storyboard */,
 				ECC049D228405A3C0017333D /* Assets.xcassets */,
 				ECC049D428405A3C0017333D /* LaunchScreen.storyboard */,
 				ECC049D728405A3C0017333D /* Info.plist */,
-				ECC049CF28405A3A0017333D /* A3_Ismail.xcdatamodeld */,
 			);
 			path = A3_Ismail;
+			sourceTree = "<group>";
+		};
+		ECC049DD28405ABD0017333D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				ECC049CF28405A3A0017333D /* A3_Ismail.xcdatamodeld */,
+				ECC049E528405FF20017333D /* Country.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		ECC049DE28405AC40017333D /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				ECC049CA28405A3A0017333D /* CountryListViewController.swift */,
+				ECC049E328405ECB0017333D /* CountryDetailsViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		ECC049DF28405ACA0017333D /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		ECC049E028405D2F0017333D /* DB */ = {
+			isa = PBXGroup;
+			children = (
+				ECC049E128405D3F0017333D /* CoreDBHelper.swift */,
+			);
+			path = DB;
+			sourceTree = "<group>";
+		};
+		ECC049E7284063530017333D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				ECC049E8284063880017333D /* CountryViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		ECC049EA2840645C0017333D /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				ECC049EB284064680017333D /* Constants.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,10 +204,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ECC049E628405FF20017333D /* Country.swift in Sources */,
+				ECC049E9284063880017333D /* CountryViewModel.swift in Sources */,
 				ECC049D128405A3A0017333D /* A3_Ismail.xcdatamodeld in Sources */,
-				ECC049CB28405A3A0017333D /* ViewController.swift in Sources */,
+				ECC049E228405D3F0017333D /* CoreDBHelper.swift in Sources */,
+				ECC049CB28405A3A0017333D /* CountryListViewController.swift in Sources */,
 				ECC049C728405A3A0017333D /* AppDelegate.swift in Sources */,
+				ECC049E428405ECB0017333D /* CountryDetailsViewController.swift in Sources */,
 				ECC049C928405A3A0017333D /* SceneDelegate.swift in Sources */,
+				ECC049EC284064680017333D /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
