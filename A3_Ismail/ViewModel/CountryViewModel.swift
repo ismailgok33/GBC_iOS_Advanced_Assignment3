@@ -11,6 +11,7 @@ class CountryViewModel {
     
     static let shared = CountryViewModel()
     
+    // Call the API here
     func fetchAllCountries(completion: @escaping ([Country]?, Error?) -> Void) {
         guard let apiURL = URL(string: API.fetchUrl) else {
             print(#function, "Unable to generate the URL!")

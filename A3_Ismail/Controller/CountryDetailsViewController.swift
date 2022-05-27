@@ -63,6 +63,7 @@ class CountryDetailsViewController: UIViewController {
         
     }
     
+    // Show Capital of the Country
     private func showCapitalOnMap(latlng: [Double], countryName: String, capital: String, area: Double) {
         if latlng.count > 1 {
             
@@ -71,6 +72,7 @@ class CountryDetailsViewController: UIViewController {
             
             let centerOfMapCoordinate = CLLocationCoordinate2D(latitude: lat, longitude: lng)
             
+            // Adjusts the visible region by the AREA data from the country data to include all of the country into the view
             let visibleRegion = MKCoordinateRegion(center: centerOfMapCoordinate, latitudinalMeters: CLLocationDistance(exactly: area)!, longitudinalMeters: CLLocationDistance(exactly: area)!)
             
             self.mapView.setRegion(visibleRegion, animated: true)
@@ -92,23 +94,6 @@ class CountryDetailsViewController: UIViewController {
         self.favoriteButton.isEnabled = false
     }
     
-//    private func toggleFavoriteButtonStyle() {
-//        if self.favoriteButton.titleLabel?.text == ButtonTitle.ADD_BUTTON_TEXT {
-//            setFavoriteButtonStyle(title: ButtonTitle.DISABLED_BUTTON_TEXT, color: .disabledButtonColor)
-//        }
-//        else if self.favoriteButton.titleLabel?.text == ButtonTitle.DISABLED_BUTTON_TEXT {
-//            setFavoriteButtonStyle(title: ButtonTitle.ADD_BUTTON_TEXT, color: .addButtonColor)
-//        }
-//    }
-    
-//    private func fetchCountryStatus() {
-//
-//        // TODO: Check if the current country is in the favoriteCountries array
-//        if let countryName = self.countryName.text {
-//            let favoriteCountry = dbHelper.searchFavorite(countryName: countryName)
-//        }
-//
-//    }
     
     // MARK: - Actions
     
@@ -122,20 +107,5 @@ class CountryDetailsViewController: UIViewController {
             }
             
         }
-        
-//        if let countryName = self.countryName.text {
-//            if dbHelper.searchFavorite(countryName: countryName) == nil {
-//                dbHelper.insertFavorite(countryName: countryName)
-//
-//                if sender.titleLabel?.text == ButtonTitle.ADD_BUTTON_TEXT {
-//                    disableFavoriteButton()
-//                }
-//            }
-//        }
-        
-        
-    }
-    
-    // MARK: - Selectors
 
 }

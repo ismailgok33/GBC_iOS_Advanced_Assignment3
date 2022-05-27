@@ -101,10 +101,12 @@ class CountryListViewController: UIViewController {
         setFavoriteCountries()
     }
     
+    // Determine if the current state of the TableView
     private func isViewInFavoriteState() -> Bool {
         return self.title == NavigationTitle.FAVORITES
     }
     
+    // Get the current Country in selected row from the current state list
     private func getCurrentCountry(row: Int) -> Country {
         if isViewInFavoriteState() {
             return favoriteCountries[row]
